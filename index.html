@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  /* Importación de fuente más fina */
+  /* Importación de fuente */
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
   body { 
@@ -13,7 +13,6 @@
     background-color: #121212; 
     margin: 0; 
     padding: 20px;
-    /* Evita scroll horizontal en dispositivos muy pequeños */
     overflow-x: hidden;
     display: flex;
     justify-content: center;
@@ -23,7 +22,6 @@
   
   .container { 
     width: 100%;
-    /* Aumentado para que en PC no se vea tan estrecho */
     max-width: 800px; 
     margin: auto; 
     text-align: center; 
@@ -31,7 +29,7 @@
     padding: 20px;
   }
 
-  /* BOTONES OPTIMIZADOS */
+  /* BOTONES PRINCIPALES */
   .btn-container { 
     margin-top: 20px; 
     display: flex;
@@ -42,13 +40,12 @@
   
   .btn {
     flex: 0 1 auto;
-    /* Botones algo más grandes para PC */
     min-width: 180px; 
     padding: 15px 30px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 14px;
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
@@ -59,14 +56,13 @@
   
   .btn-pdf { background-color: #333; color: #ddd; border: 1px solid #444; } 
   .btn-form { background-color: #d81b60; color: white; }
+  .btn-private { background-color: #4a148c; color: white; }
   
   .btn:hover { 
     opacity: 0.9; 
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
-  .btn-pdf:hover { background-color: #444; color: #fff; }
-  .btn-form:hover { background-color: #ad1457; }
 
   /* REDES SOCIALES */
   .social-container {
@@ -87,86 +83,99 @@
     padding: 8px 16px;
     border: 1px solid #2a2a2a;
     border-radius: 4px;
-    white-space: nowrap;
   }
   
-  .social-link:hover {
-    color: #f06292;
-    border-color: #f06292;
-    background: rgba(240, 98, 146, 0.05);
+  .social-link:hover { color: #f06292; border-color: #f06292; }
+
+  /* VENTANA EMERGENTE (MODAL) */
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    backdrop-filter: blur(8px);
   }
 
-  /* IMAGEN INFERIOR */
-  .footer-image {
-    margin-top: 20px;
+  .modal-content {
+    background-color: #1e1e1e;
+    margin: 15% auto;
+    padding: 40px 30px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+  }
+
+  .modal-content h2 { color: #ba68c8; font-size: 1.2em; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+
+  .login-input {
     width: 100%;
-    max-width: 400px; 
-    height: auto;
-    border-radius: 8px;
-    opacity: 0.6;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    transition: opacity 0.3s;
-  }
-  .footer-image:hover { opacity: 0.9; }
-
-  .footer-text { 
-    margin-top: 20px; 
-    font-size: 0.75em; 
-    color: #444; 
-    font-weight: 300; 
-    letter-spacing: 2px;
+    padding: 12px;
+    margin: 8px 0;
+    background: #121212;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
   }
 
-  /* ESTILO DEL CONTADOR DISCRETO (POSICIÓN FINAL) */
-  .countdown-container {
-    margin-top: 25px;
-    padding: 15px 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: inline-block;
-  }
-  
-  .countdown-title {
-    font-size: 0.65em;
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #ba68c8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+  }
+
+  .close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
     color: #555;
-    margin-bottom: 8px;
-    font-weight: 400;
+    font-size: 28px;
+    cursor: pointer;
   }
 
-  .timer {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    font-weight: 300;
+  #secret-area {
+    display: none;
+    margin-top: 10px;
   }
 
-  .timer-segment {
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
+  .btn-secret {
+    display: block;
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 10px;
+    border: 1px solid #4caf50;
   }
 
-  .timer-value {
-    font-size: 1.1em;
-    color: #ba68c8;
-  }
+  /* IMAGEN Y PIE */
+  .footer-image { margin: 30px auto; width: 100%; max-width: 380px; opacity: 0.6; display: block; border-radius: 10px; }
+  .footer-text { margin-top: 20px; font-size: 0.75em; color: #444; letter-spacing: 2px; }
 
-  .timer-label {
-    font-size: 0.6em;
-    text-transform: lowercase;
-    color: #444;
-  }
+  /* CONTADOR FINAL */
+  .countdown-container { margin-top: 25px; padding: 15px 10px; border-top: 1px solid rgba(255,255,255,0.05); display: inline-block; }
+  .timer { display: flex; justify-content: center; gap: 12px; font-weight: 300; }
+  .timer-value { font-size: 1.1em; color: #ba68c8; }
+  .timer-label { font-size: 0.6em; color: #444; margin-left: 2px; }
 
-  /* Ajustes específicos para móviles */
   @media (max-width: 600px) {
-    body { padding: 10px; }
-    .container { padding: 10px; }
-    .btn { width: 100%; min-width: 100%; font-size: 14px; }
-    .social-link { font-size: 0.75em; padding: 6px 12px; }
-    .footer-image { max-width: 100%; }
+    .btn { width: 100%; min-width: 100%; }
+    .modal-content { margin: 30% auto; padding: 30px 20px; }
   }
 </style>
 </head>
@@ -174,78 +183,108 @@
 
 <div class="container">
 
-  <!-- Botones de Acción -->
   <div class="btn-container">
     <a href="https://drive.google.com/file/d/1H3HXoF9c7YHNhTp9lICHEg4ArvRCDzOQ/view?usp=sharing" target="_blank" class="btn btn-pdf">PROGRAMA PDF</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7IbhJw4I4EerqeVoJBHP9WuAHGw_pO2W-ignQu_pao0E7Yw/viewform" target="_blank" class="btn btn-form">INSCRIPCIÓN</a>
+    <button onclick="openModal()" class="btn btn-private">LISTADO ASISTENTES</button>
   </div>
 
-  <!-- Redes Sociales -->
   <div class="social-container">
-    <a href="https://www.instagram.com/fesmcugtclm?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.instagram.com/fesmcugtclm" target="_blank" class="social-link">Instagram</a>
     <a href="https://www.tiktok.com/@fesmcugtclm" target="_blank" class="social-link">TikTok</a>
     <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" target="_blank" class="social-link">WhatsApp</a>
   </div>
 
-  <!-- Imagen y Pie -->
-  <img src="https://lh3.googleusercontent.com/d/1hKCTFVnz8V9Je0dCOERXZDxov-vgivI0" alt="Logo Jornadas" class="footer-image" onerror="this.style.display='none'">
+  <img src="https://lh3.googleusercontent.com/d/1hKCTFVnz8V9Je0dCOERXZDxov-vgivI0" alt="Logo UGT" class="footer-image">
 
   <div class="footer-text">
     <p>FeSMCUGTCLM · 2026</p>
   </div>
 
-  <!-- Bloque del Contador Regresivo (Ahora abajo del todo) -->
   <div class="countdown-container">
-    <div class="countdown-title">Faltan</div>
     <div id="countdown" class="timer">
-      <div class="timer-segment">
-        <span id="days" class="timer-value">00</span>
-        <span class="timer-label">d</span>
-      </div>
-      <div class="timer-segment">
-        <span id="hours" class="timer-value">00</span>
-        <span class="timer-label">h</span>
-      </div>
-      <div class="timer-segment">
-        <span id="minutes" class="timer-value">00</span>
-        <span class="timer-label">m</span>
-      </div>
-      <div class="timer-segment">
-        <span id="seconds" class="timer-value">00</span>
-        <span class="timer-label">s</span>
-      </div>
+      <div class="timer-segment"><span id="days" class="timer-value">00</span><span class="timer-label">d</span></div>
+      <div class="timer-segment"><span id="hours" class="timer-value">00</span><span class="timer-label">h</span></div>
+      <div class="timer-segment"><span id="minutes" class="timer-value">00</span><span class="timer-label">m</span></div>
+      <div class="timer-segment"><span id="seconds" class="timer-value">00</span><span class="timer-label">s</span></div>
     </div>
   </div>
 
 </div>
 
-<script>
-  // Configuración de la fecha objetivo: 25 de febrero de 2026 a las 10:00 AM
-  const targetDate = new Date("Feb 25, 2026 10:00:00").getTime();
+<!-- MODAL DE ACCESO RESTRINGIDO -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h2>Gestión Interna</h2>
+    
+    <div id="login-fields">
+      <p style="font-size: 0.85em; color: #888; margin-bottom: 20px;">Introduce credenciales para ver el listado de Google Sheets.</p>
+      <input type="text" id="userInput" class="login-input" placeholder="Usuario">
+      <input type="password" id="passInput" class="login-input" placeholder="Contraseña">
+      <button onclick="checkLogin()" class="login-btn">Validar Acceso</button>
+      <p id="error-msg" style="color: #f44336; font-size: 0.8em; display: none; margin-top: 15px;">Credenciales incorrectas</p>
+    </div>
 
+    <!-- AREA QUE APARECE TRAS EL LOGIN -->
+    <div id="secret-area">
+      <p style="color: #4caf50; font-weight: bold;">✓ Acceso Concedido</p>
+      <!-- ENLACE ACTUALIZADO A TU HOJA DE GOOGLE SHEETS -->
+      <a href="https://docs.google.com/spreadsheets/d/1iaDpGLEzaGu0kNrd0JQY8tRdUXJKe29RwQ25aVIRNVU/edit?usp=sharing" target="_blank" class="btn-secret">
+        📂 ABRIR EXCEL ASISTENTES
+      </a>
+      <p style="font-size: 0.7em; color: #666; margin-top: 15px;">Solo personal autorizado de UGT.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById("loginModal").style.display = "block";
+    document.getElementById("login-fields").style.display = "block";
+    document.getElementById("secret-area").style.display = "none";
+    document.getElementById("error-msg").style.display = "none";
+    document.getElementById("userInput").value = "";
+    document.getElementById("passInput").value = "";
+  }
+
+  function closeModal() {
+    document.getElementById("loginModal").style.display = "none";
+  }
+
+  function checkLogin() {
+    const user = document.getElementById("userInput").value;
+    const pass = document.getElementById("passInput").value;
+
+    // CREDENCIALES
+    const USER_OK = "admin";
+    const PASS_OK = "ugt2026"; 
+
+    if(user === USER_OK && pass === PASS_OK) {
+      document.getElementById("login-fields").style.display = "none";
+      document.getElementById("secret-area").style.display = "block";
+    } else {
+      document.getElementById("error-msg").style.display = "block";
+    }
+  }
+
+  window.onclick = function(event) {
+    if (event.target == document.getElementById("loginModal")) closeModal();
+  }
+
+  const targetDate = new Date("Feb 25, 2026 10:00:00").getTime();
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
-
     if (distance < 0) {
       document.querySelector(".countdown-container").style.display = "none";
       return;
     }
-
-    // Cálculos de tiempo
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Actualización del DOM
-    document.getElementById("days").innerText = days.toString().padStart(2, '0');
-    document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-    document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-    document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
   }
-
-  // Actualizar cada segundo
   setInterval(updateCountdown, 1000);
   updateCountdown();
 </script>
