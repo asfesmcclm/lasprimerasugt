@@ -75,6 +75,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    margin-bottom: 40px;
   }
   
   .social-link {
@@ -95,25 +96,66 @@
     background: rgba(240, 98, 146, 0.05);
   }
 
+  /* ESTILO DEL CONTADOR DISCRETO */
+  .countdown-container {
+    margin-top: 40px;
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: inline-block;
+  }
+  
+  .countdown-title {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #777;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .timer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 300;
+  }
+
+  .timer-segment {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .timer-value {
+    font-size: 1.2em;
+    color: #ba68c8;
+  }
+
+  .timer-label {
+    font-size: 0.6em;
+    text-transform: lowercase;
+    color: #555;
+  }
+
   /* IMAGEN INFERIOR */
   .footer-image {
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
-    max-width: 450px; 
+    max-width: 400px; 
     height: auto;
     border-radius: 8px;
-    opacity: 0.8;
+    opacity: 0.6;
     display: block;
     margin-left: auto;
     margin-right: auto;
     transition: opacity 0.3s;
   }
-  .footer-image:hover { opacity: 1; }
+  .footer-image:hover { opacity: 0.9; }
 
   .footer-text { 
-    margin-top: 30px; 
-    font-size: 0.8em; 
-    color: #555; 
+    margin-top: 20px; 
+    font-size: 0.75em; 
+    color: #444; 
     padding-bottom: 10px; 
     font-weight: 300; 
     letter-spacing: 2px;
@@ -126,6 +168,7 @@
     .btn { width: 100%; min-width: 100%; font-size: 14px; }
     .social-link { font-size: 0.75em; padding: 6px 12px; }
     .footer-image { max-width: 100%; }
+    .timer-value { font-size: 1.1em; }
   }
 </style>
 </head>
@@ -133,17 +176,43 @@
 
 <div class="container">
 
+  <!-- Botones de Acción -->
   <div class="btn-container">
     <a href="https://drive.google.com/file/d/1H3HXoF9c7YHNhTp9lICHEg4ArvRCDzOQ/view?usp=sharing" target="_blank" class="btn btn-pdf">PROGRAMA PDF</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7IbhJw4I4EerqeVoJBHP9WuAHGw_pO2W-ignQu_pao0E7Yw/viewform" target="_blank" class="btn btn-form">INSCRIPCIÓN</a>
   </div>
 
+  <!-- Redes Sociales -->
   <div class="social-container">
     <a href="https://www.instagram.com/fesmcugtclm?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-link">Instagram</a>
     <a href="https://www.tiktok.com/@fesmcugtclm" target="_blank" class="social-link">TikTok</a>
     <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" target="_blank" class="social-link">WhatsApp</a>
   </div>
 
+  <!-- Bloque del Contador Regresivo Discreto -->
+  <div class="countdown-container">
+    <div class="countdown-title">Faltan</div>
+    <div id="countdown" class="timer">
+      <div class="timer-segment">
+        <span id="days" class="timer-value">00</span>
+        <span class="timer-label">d</span>
+      </div>
+      <div class="timer-segment">
+        <span id="hours" class="timer-value">00</span>
+        <span class="timer-label">h</span>
+      </div>
+      <div class="timer-segment">
+        <span id="minutes" class="timer-value">00</span>
+        <span class="timer-label">m</span>
+      </div>
+      <div class="timer-segment">
+        <span id="seconds" class="timer-value">00</span>
+        <span class="timer-label">s</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Imagen y Pie -->
   <img src="https://lh3.googleusercontent.com/d/1hKCTFVnz8V9Je0dCOERXZDxov-vgivI0" alt="Logo Jornadas" class="footer-image" onerror="this.style.display='none'">
 
   <div class="footer-text">
@@ -151,6 +220,37 @@
   </div>
 
 </div>
+
+<script>
+  // Configuración de la fecha objetivo: 25 de febrero de 2026 a las 10:00 AM
+  const targetDate = new Date("Feb 25, 2026 10:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      document.querySelector(".countdown-container").style.display = "none";
+      return;
+    }
+
+    // Cálculos de tiempo
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Actualización del DOM
+    document.getElementById("days").innerText = days.toString().padStart(2, '0');
+    document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+  }
+
+  // Actualizar cada segundo
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
 
 </body>
 </html>
