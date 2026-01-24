@@ -96,47 +96,6 @@
     background: rgba(240, 98, 146, 0.05);
   }
 
-  /* ESTILO DEL CONTADOR DISCRETO */
-  .countdown-container {
-    margin-top: 40px;
-    padding: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: inline-block;
-  }
-  
-  .countdown-title {
-    font-size: 0.7em;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #777;
-    margin-bottom: 8px;
-    font-weight: 400;
-  }
-
-  .timer {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    font-weight: 300;
-  }
-
-  .timer-segment {
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
-  }
-
-  .timer-value {
-    font-size: 1.2em;
-    color: #ba68c8;
-  }
-
-  .timer-label {
-    font-size: 0.6em;
-    text-transform: lowercase;
-    color: #555;
-  }
-
   /* IMAGEN INFERIOR */
   .footer-image {
     margin-top: 20px;
@@ -156,9 +115,49 @@
     margin-top: 20px; 
     font-size: 0.75em; 
     color: #444; 
-    padding-bottom: 10px; 
     font-weight: 300; 
     letter-spacing: 2px;
+  }
+
+  /* ESTILO DEL CONTADOR DISCRETO (POSICIÓN FINAL) */
+  .countdown-container {
+    margin-top: 25px;
+    padding: 15px 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: inline-block;
+  }
+  
+  .countdown-title {
+    font-size: 0.65em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .timer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 300;
+  }
+
+  .timer-segment {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .timer-value {
+    font-size: 1.1em;
+    color: #ba68c8;
+  }
+
+  .timer-label {
+    font-size: 0.6em;
+    text-transform: lowercase;
+    color: #444;
   }
 
   /* Ajustes específicos para móviles */
@@ -168,7 +167,6 @@
     .btn { width: 100%; min-width: 100%; font-size: 14px; }
     .social-link { font-size: 0.75em; padding: 6px 12px; }
     .footer-image { max-width: 100%; }
-    .timer-value { font-size: 1.1em; }
   }
 </style>
 </head>
@@ -189,7 +187,14 @@
     <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" target="_blank" class="social-link">WhatsApp</a>
   </div>
 
-  <!-- Bloque del Contador Regresivo Discreto -->
+  <!-- Imagen y Pie -->
+  <img src="https://lh3.googleusercontent.com/d/1hKCTFVnz8V9Je0dCOERXZDxov-vgivI0" alt="Logo Jornadas" class="footer-image" onerror="this.style.display='none'">
+
+  <div class="footer-text">
+    <p>FeSMCUGTCLM · 2026</p>
+  </div>
+
+  <!-- Bloque del Contador Regresivo (Ahora abajo del todo) -->
   <div class="countdown-container">
     <div class="countdown-title">Faltan</div>
     <div id="countdown" class="timer">
@@ -210,13 +215,6 @@
         <span class="timer-label">s</span>
       </div>
     </div>
-  </div>
-
-  <!-- Imagen y Pie -->
-  <img src="https://lh3.googleusercontent.com/d/1hKCTFVnz8V9Je0dCOERXZDxov-vgivI0" alt="Logo Jornadas" class="footer-image" onerror="this.style.display='none'">
-
-  <div class="footer-text">
-    <p>FeSMCUGTCLM · 2026</p>
   </div>
 
 </div>
