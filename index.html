@@ -1,213 +1,293 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FeSMC UGT CLM - Área de Servicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --ugt-red: #e30613;
-            --ugt-dark: #1a1a1a;
-            --bg-light: #f2f4f7;
-            --white: #ffffff;
-            --shadow: 0 4px 12px rgba(0,0,0,0.05);
-            --radius: 18px;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* Importación de fuente */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { 
+    font-family: 'Inter', sans-serif; 
+    color: #cfcfcf; 
+    line-height: 1.4; 
+    background-color: #121212; 
+    margin: 0; 
+    padding: 20px;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .container { 
+    width: 100%;
+    max-width: 800px; 
+    margin: auto; 
+    text-align: center; 
+    box-sizing: border-box;
+    padding: 20px;
+  }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--ugt-dark);
-            line-height: 1.4;
-            padding-bottom: 90px;
-            overflow-x: hidden;
-        }
+  /* BOTONES PRINCIPALES */
+  .btn-container { 
+    margin-top: 20px; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .btn {
+    flex: 0 1 auto;
+    min-width: 180px; 
+    padding: 15px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .btn-pdf { background-color: #333; color: #ddd; border: 1px solid #444; } 
+  .btn-form { background-color: #d81b60; color: white; }
+  .btn-private { background-color: #4a148c; color: white; }
+  
+  .btn:hover { 
+    opacity: 0.9; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
 
-        header { background: var(--white); padding: 1.2rem; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 0 rgba(0,0,0,0.05); }
-        .logo-text { font-weight: 800; font-size: 1rem; color: var(--ugt-red); letter-spacing: 0.5px; text-transform: uppercase; }
-        
-        .hero { background: linear-gradient(180deg, var(--ugt-red) 0%, #b3050f 100%); color: white; padding: 2.5rem 1.5rem; text-align: center; border-radius: 0 0 30px 30px; margin-bottom: 1rem; }
-        .hero h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .cta-button { display: inline-block; background: var(--white); color: var(--ugt-red); padding: 0.8rem 1.8rem; border-radius: 14px; text-decoration: none; font-weight: 700; margin-top: 1.5rem; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+  /* REDES SOCIALES */
+  .social-container {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+  
+  .social-link {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 300;
+    transition: 0.2s;
+    padding: 8px 16px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+  }
+  
+  .social-link:hover { color: #f06292; border-color: #f06292; }
 
-        .container { max-width: 600px; margin: 0 auto; padding: 0 1.2rem; }
-        .section-title { margin: 1.8rem 0 0.8rem 0.2rem; font-size: 0.8rem; text-transform: uppercase; color: #7a7a7a; font-weight: 700; letter-spacing: 1px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        
-        /* ESTILO CARDS */
-        .card { background: var(--white); padding: 1.2rem; border-radius: var(--radius); text-decoration: none; color: var(--ugt-dark); display: flex; flex-direction: column; align-items: flex-start; box-shadow: var(--shadow); transition: all 0.2s ease; border: 1px solid rgba(0,0,0,0.02); cursor: pointer; }
-        .card:active { transform: scale(0.96); background-color: #f9f9f9; }
-        
-        /* Iconos Generales */
-        .card i { color: var(--ugt-red); margin-bottom: 0.8rem; background: #fff0f1; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
-        
-        /* Iconos de las APPs Reales */
-        .app-icon { width: 52px; height: 52px; border-radius: 12px; margin-bottom: 0.8rem; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  /* VENTANA EMERGENTE (MODAL) */
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    backdrop-filter: blur(8px);
+  }
 
-        .card-content h3 { font-size: 0.85rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.3rem; }
-        .card-content p { font-size: 0.75rem; color: #777; }
+  .modal-content {
+    background-color: #1e1e1e;
+    margin: 15% auto;
+    padding: 40px 30px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+  }
 
-        /* SOCIAL BAR */
-        .social-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
-        .social-card { background: var(--white); padding: 1rem; border-radius: var(--radius); text-align: center; text-decoration: none; color: var(--ugt-dark); box-shadow: var(--shadow); display: flex; justify-content: center; align-items: center; }
+  .modal-content h2 { color: #ba68c8; font-size: 1.2em; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* MODALES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: flex-end; z-index: 3000; }
-        .modal-content { background: var(--white); width: 100%; max-width: 500px; padding: 2rem; border-radius: 30px 30px 0 0; animation: slideUp 0.3s ease-out; max-height: 90vh; overflow-y: auto; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .modal-content h2 { font-size: 1.2rem; color: var(--ugt-red); margin-bottom: 1rem; }
-        .modal-content p { font-size: 0.9rem; color: #444; margin-bottom: 0.8rem; }
-        .modal-content ul { font-size: 0.85rem; color: #555; margin-left: 1.2rem; margin-bottom: 1rem; }
-        .modal-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
-        .btn-modal { padding: 1rem; border-radius: 12px; text-align: center; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; }
-        .btn-primary { background: var(--ugt-red); color: white; }
-        .btn-secondary { background: #eee; color: var(--ugt-dark); }
-        .btn-close { color: #888; font-size: 0.8rem; margin-top: 1rem; display: block; text-align: center; text-decoration: none; }
+  .login-input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #121212;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
 
-        /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 0.8rem 0 calc(0.8rem + env(safe-area-inset-bottom)); border-top: 1px solid rgba(0,0,0,0.05); z-index: 2000; }
-        .nav-item { text-decoration: none; color: #8e8e93; display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
-        .nav-item.active { color: var(--ugt-red); }
-        .nav-item span { font-size: 0.65rem; font-weight: 600; }
-        
-        footer { padding: 2rem 1.5rem; text-align: center; opacity: 0.5; font-size: 0.75rem; }
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #ba68c8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    text-transform: uppercase;
+  }
 
-        @media (min-width: 600px) { .grid { grid-template-columns: repeat(3, 1fr); } .modal-content { border-radius: 20px; margin-bottom: 2rem; } }
-    </style>
+  .close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #555;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  #secret-area {
+    display: none;
+    margin-top: 10px;
+  }
+
+  .btn-secret {
+    display: block;
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 10px;
+    border: 1px solid #4caf50;
+  }
+
+  /* IMAGEN Y PIE */
+  .footer-image { margin: 30px auto; width: 100%; max-width: 380px; opacity: 0.6; display: block; border-radius: 10px; }
+  .footer-text { margin-top: 20px; font-size: 0.75em; color: #444; letter-spacing: 2px; }
+
+  /* CONTADOR FINAL */
+  .countdown-container { margin-top: 25px; padding: 15px 10px; border-top: 1px solid rgba(255,255,255,0.05); display: inline-block; }
+  .timer { display: flex; justify-content: center; gap: 12px; font-weight: 300; }
+  .timer-value { font-size: 1.1em; color: #ba68c8; }
+  .timer-label { font-size: 0.6em; color: #444; margin-left: 2px; }
+
+  @media (max-width: 600px) {
+    .btn { width: 100%; min-width: 100%; }
+    .modal-content { margin: 30% auto; padding: 30px 20px; }
+  }
+</style>
 </head>
 <body>
 
-    <header><div class="logo-text">FeSMC UGT CLM</div></header>
+<div class="container">
 
-    <section class="hero">
-        <h1>Tu sindicato en el móvil</h1>
-        <p>Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
-        <a href="https://www.ugt.es/ficha-de-afiliacion" class="cta-button">¡AFÍLIATE AHORA!</a>
-    </section>
+  <div class="btn-container">
+    <a href="https://drive.google.com/file/d/1H3HXoF9c7YHNhTp9lICHEg4ArvRCDzOQ/view?usp=sharing" target="_blank" class="btn btn-pdf">PROGRAMA PDF</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7IbhJw4I4EerqeVoJBHP9WuAHGw_pO2W-ignQu_pao0E7Yw/viewform" target="_blank" class="btn btn-form">INSCRIPCIÓN</a>
+    <button onclick="openModal()" class="btn btn-private">LISTADO ASISTENTES</button>
+  </div>
 
-    <div class="container">
-        <h2 class="section-title">Canales Oficiales</h2>
-        <div class="social-bar">
-            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-card"><i data-lucide="message-circle"></i></a>
-            <a href="https://www.instagram.com/fesmcugtclm" class="social-card"><i data-lucide="instagram"></i></a>
-            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-card"><i data-lucide="smartphone"></i></a>
-        </div>
+  <div class="social-container">
+    <a href="https://www.instagram.com/fesmcugtclm" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.tiktok.com/@fesmcugtclm" target="_blank" class="social-link">TikTok</a>
+    <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" target="_blank" class="social-link">WhatsApp</a>
+  </div>
 
-        <h2 class="section-title">Calculadoras y Modelos</h2>
-        <div class="grid">
-            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="card">
-                <i data-lucide="calendar"></i>
-                <div class="card-content"><h3>Calculadora Vacaciones</h3><p>Días pendientes</p></div>
-            </a>
-            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="card">
-                <i data-lucide="gavel"></i>
-                <div class="card-content"><h3>Indemnización Despido</h3><p>Cálculo oficial</p></div>
-            </a>
-            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos" class="card">
-                <i data-lucide="file-text"></i>
-                <div class="card-content"><h3>Modelos y Escritos</h3><p>Reclamaciones</p></div>
-            </a>
-            <a href="https://e.pcloud.link/publink/show?code=kZqvpdZFdLEdibwWjbbbDBeo4oHqhnTbdNV" class="card">
-                <i data-lucide="graduation-cap"></i>
-                <div class="card-content"><h3>Permiso Formación</h3><p>Solicitud oficial</p></div>
-            </a>
-        </div>
+  <img src="https://lh3.googleusercontent.com/d/1hKCTFVnz8V9Je0dCOERXZDxov-vgivI0" alt="Logo UGT" class="footer-image">
 
-        <h2 class="section-title">Nuestras APPs Oficiales</h2>
-        <div class="grid">
-            <div class="card" onclick="openModal('modalRegistra')">
-                <img src="https://play-lh.googleusercontent.com/YOIW6iOR0iTA5UhhyzhsPUSE3jgl1LNLwl9Z3Uraio8towxliRTPcpf_CkVcFs3WqR8=w240-h480" class="app-icon" alt="UGT Registra">
-                <div class="card-content">
-                    <h3>UGT Registra</h3>
-                    <p>Control jornada</p>
-                </div>
-            </div>
-            <div class="card" onclick="openModal('modalAfiliado')">
-                <img src="https://play-lh.googleusercontent.com/97y_D0q8_n06zQzGkR1pD5qYk4qf9p6_O-9p0hL6S5z6f4G9z8_f8v8x_v8x_v8x_v8" class="app-icon" alt="UGT App">
-                <div class="card-content">
-                    <h3>App del Afiliado</h3>
-                    <p>Gestión personal</p>
-                </div>
-            </div>
-        </div>
+  <div class="footer-text">
+    <p>FeSMCUGTCLM · 2026</p>
+  </div>
 
-        <h2 class="section-title">Información</h2>
-        <div class="grid">
-            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="card">
-                <i data-lucide="book-open"></i>
-                <div class="card-content"><h3>Convenios CLM</h3><p>Consulta tu sector</p></div>
-            </a>
-            <a href="https://www.ugtclm.es/" class="card">
-                <i data-lucide="globe"></i>
-                <div class="card-content"><h3>Web Oficial</h3><p>UGT CLM Online</p></div>
-            </a>
-        </div>
-        <footer><p><strong>FeSMC UGT Castilla-La Mancha</strong><br>Unión General de Trabajadoras y Trabajadores</p></footer>
+  <div class="countdown-container">
+    <div id="countdown" class="timer">
+      <div class="timer-segment"><span id="days" class="timer-value">00</span><span class="timer-label">d</span></div>
+      <div class="timer-segment"><span id="hours" class="timer-value">00</span><span class="timer-label">h</span></div>
+      <div class="timer-segment"><span id="minutes" class="timer-value">00</span><span class="timer-label">m</span></div>
+      <div class="timer-segment"><span id="seconds" class="timer-value">00</span><span class="timer-label">s</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL DE ACCESO RESTRINGIDO -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h2>Gestión Interna</h2>
+    
+    <div id="login-fields">
+      <p style="font-size: 0.85em; color: #888; margin-bottom: 20px;">Introduce credenciales para ver el listado de Google Sheets.</p>
+      <input type="text" id="userInput" class="login-input" placeholder="Usuario">
+      <input type="password" id="passInput" class="login-input" placeholder="Contraseña">
+      <button onclick="checkLogin()" class="login-btn">Validar Acceso</button>
+      <p id="error-msg" style="color: #f44336; font-size: 0.8em; display: none; margin-top: 15px;">Credenciales incorrectas</p>
     </div>
 
-    <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
-        <div class="modal-content">
-            <h2>UGT Registra</h2>
-            <p>Registra tu jornada laboral y consulta tus datos con facilidad.</p>
-            <ul>
-                <li>Registrar jornadas y descansos.</li>
-                <li>Generar informes de jornada.</li>
-                <li>Exportar datos del usuario.</li>
-            </ul>
-            <div class="modal-actions">
-                <a href="#" id="link-registra-final" class="btn-modal btn-primary" target="_blank">Descargar Aplicación</a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Volver atrás</a>
-        </div>
+    <!-- AREA QUE APARECE TRAS EL LOGIN -->
+    <div id="secret-area">
+      <p style="color: #4caf50; font-weight: bold;">✓ Acceso Concedido</p>
+      <!-- ENLACE ACTUALIZADO A TU HOJA DE GOOGLE SHEETS -->
+      <a href="https://docs.google.com/spreadsheets/d/1iaDpGLEzaGu0kNrd0JQY8tRdUXJKe29RwQ25aVIRNVU/edit?usp=sharing" target="_blank" class="btn-secret">
+        📂 ABRIR EXCEL ASISTENTES
+      </a>
+      <p style="font-size: 0.7em; color: #666; margin-top: 15px;">Solo personal autorizado de UGT.</p>
     </div>
+  </div>
+</div>
 
-    <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
-        <div class="modal-content">
-            <h2>Acceso a UGT App</h2>
-            <p>Exclusivo para afiliados. Requiere claves enviadas a tu correo oficial según la normativa GDPR.</p>
-            <div class="modal-actions">
-                <a href="https://www.ugt.es/ugt-app" class="btn-modal btn-primary" target="_blank">Solicitar Credenciales</a>
-                <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Ya tengo claves, descargar</a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar aviso</a>
-        </div>
-    </div>
+<script>
+  function openModal() {
+    document.getElementById("loginModal").style.display = "block";
+    document.getElementById("login-fields").style.display = "block";
+    document.getElementById("secret-area").style.display = "none";
+    document.getElementById("error-msg").style.display = "none";
+    document.getElementById("userInput").value = "";
+    document.getElementById("passInput").value = "";
+  }
 
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
-        <a href="https://whatsapp.com/channel/..." class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
-        <a href="https://www.ugtclm.es/" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
-        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i data-lucide="user-plus"></i><span>Afiliarse</span></a>
-    </nav>
+  function closeModal() {
+    document.getElementById("loginModal").style.display = "none";
+  }
 
-    <script>
-        // Inicializar iconos
-        lucide.createIcons();
+  function checkLogin() {
+    const user = document.getElementById("userInput").value;
+    const pass = document.getElementById("passInput").value;
 
-        function configurarEnlacesApps() {
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            const btnRegistra = document.getElementById('link-registra-final');
-            const btnAfiliado = document.getElementById('link-afiliado-final');
+    // CREDENCIALES
+    const USER_OK = "admin";
+    const PASS_OK = "ugt2026"; 
 
-            if (isIOS) {
-                if(btnRegistra) btnRegistra.href = "https://apps.apple.com/es/app/ugt-registra/id6737269009";
-                if(btnAfiliado) btnAfiliado.href = "https://apps.apple.com/es/app/ugt-app/id1531325029";
-            } else {
-                if(btnRegistra) btnRegistra.href = "https://play.google.com/store/apps/details?id=com.ugt.ugtregistra";
-                if(btnAfiliado) btnAfiliado.href = "https://play.google.com/store/apps/details?id=com.app.ugt";
-            }
-        }
+    if(user === USER_OK && pass === PASS_OK) {
+      document.getElementById("login-fields").style.display = "none";
+      document.getElementById("secret-area").style.display = "block";
+    } else {
+      document.getElementById("error-msg").style.display = "block";
+    }
+  }
 
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function closeModalExterno(e, id) { if(e.target.id === id) closeModal(id); }
+  window.onclick = function(event) {
+    if (event.target == document.getElementById("loginModal")) closeModal();
+  }
 
-        window.addEventListener('load', configurarEnlacesApps);
-    </script>
+  const targetDate = new Date("Feb 25, 2026 10:00:00").getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    if (distance < 0) {
+      document.querySelector(".countdown-container").style.display = "none";
+      return;
+    }
+    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
 </body>
 </html>
